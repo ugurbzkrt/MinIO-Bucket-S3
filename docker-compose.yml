@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    volumes:
+      - /mnt/minio-data:/data
+    ports:
+      - "9000:9000"  # API
+      - "9001:9001"  # Console
+    env_file:
+      - .env
+    command: server /data --console-address ":9001"
+    restart: always
